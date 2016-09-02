@@ -1,8 +1,10 @@
+
 function loadData( filePath ){
     return new Promise( resolve => {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
+                //instead of resolving raw data, the function also does some data processing
                 let response = xhr.responseText;
 
                 let rawSchoolData = response.split(/\r\n|\n/).map( school => school.split( ',') );
@@ -23,3 +25,6 @@ function loadData( filePath ){
         xhr.send(null);
     });
 };
+
+//Calling Function
+loadData( '/schoolData?id="PEI"');
