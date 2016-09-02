@@ -1,4 +1,5 @@
 
+//We could further improve this name now
 function ProcessTheResponseBeforeReturning( response ){
     let rawSchoolData = response.split(/\r\n|\n/).map( school => school.split( ',') );
     let headerRows = rawSchoolData.slice(0, 1)[0].filter( lineItem => !!lineItem );
@@ -13,7 +14,7 @@ function ProcessTheResponseBeforeReturning( response ){
     return { headerRows, schoolData };
 }
 
-
+//We could improve this name too
 function CreateARequestToLoadData( filePath, callback ){
     return new Promise( resolve => {
         var xhr = new XMLHttpRequest();
@@ -29,4 +30,4 @@ function CreateARequestToLoadData( filePath, callback ){
 };
 
 //Calling function
-CreateARequestToLoadData( '/schoolData?id="PEI"', dataProcessor);
+CreateARequestToLoadData( '/schoolData?id="PEI"', ProcessTheResponseBeforeReturning);
