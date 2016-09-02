@@ -1,10 +1,11 @@
 
-function loadData( filePath ){
+function CreateARequestToLoadDataAndThenProcessTheResponseBeforeReturning( filePath ){
     return new Promise( resolve => {
+        //Create a Request to Load Data
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                //instead of resolving raw data, the function also does some data processing
+                //Process the response before returning
                 let response = xhr.responseText;
 
                 let rawSchoolData = response.split(/\r\n|\n/).map( school => school.split( ',') );

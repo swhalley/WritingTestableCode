@@ -1,5 +1,5 @@
 
-function dataProcessor( response ){
+function ProcessTheResponseBeforeReturning( response ){
     let rawSchoolData = response.split(/\r\n|\n/).map( school => school.split( ',') );
     let headerRows = rawSchoolData.slice(0, 1)[0].filter( lineItem => !!lineItem );
     let schoolData = rawSchoolData.slice(1).map( school => school.slice( 0, headerRows.length));
@@ -9,10 +9,12 @@ function dataProcessor( response ){
             school[i] = +school[i];
         }
     });
+
+    return { headerRows, schoolData };
 }
 
 
-function loadData( filePath, callback ){
+function CreateARequestToLoadData( filePath, callback ){
     return new Promise( resolve => {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -27,4 +29,4 @@ function loadData( filePath, callback ){
 };
 
 //Calling function
-loadData( '/schoolData?id="PEI"', dataProcessor);
+CreateARequestToLoadData( '/schoolData?id="PEI"', dataProcessor);
