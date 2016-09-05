@@ -14,7 +14,7 @@ function ProcessTheResponseBeforeReturning( response ){
     return { headerRows, schoolData };
 }
 
-//We could improve this name too
+//We could improve this name too, and move it out to its own class; service.get()?
 function CreateARequestToLoadData( filePath, callback ){
     return new Promise( resolve => {
         var xhr = new XMLHttpRequest();
